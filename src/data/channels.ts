@@ -1,85 +1,46 @@
 import { Channel } from "@/types";
 
 export const CHANNELS: Channel[] = [
-  {
-    id: "tv2000",
-    name: "TV2000",
+  { 
+    id: "tv2000", 
+    name: "TV2000", 
     type: "tv",
-    url: "https://live.tv2000.it/hls/live/TV2000/master.m3u8",
-    logo: "/logos/tv2000.svg",
-    description: "Italian Catholic Television",
-    category: "Catholic TV",
+    url: "https://hls-live-tv2000.akamaized.net/hls/live/2028510/tv2000/master.m3u8",
+    logo: "/logos/tv2000.png", 
+    description: "Italian Catholic Television" 
   },
-  {
-    id: "telepace",
-    name: "Telepace",
+  { 
+    id: "telepace", 
+    name: "Telepace", 
     type: "tv",
-    url: "https://streaming.telepace.it/hls/stream.m3u8",
-    logo: "/logos/telepace.svg",
-    description: "Catholic TV Network",
-    category: "Catholic TV",
+    // Note: The Dailymotion link you found is session-based. 
+    // Using the MariaTV CDN link is safer for permanent implementation.
+    url: "https://live.mariatvcdn.com/mariatvpoint/d36592901d5429dd7f9ec1e7bbeda8c2.sdp/index.m3u8",
+    logo: "/logos/telepace.png", 
+    description: "Catholic TV Network" 
   },
-  {
-    id: "telepadrepio",
-    name: "Tele Padre Pio",
+  { 
+    id: "catholictv", 
+    name: "CatholicTV", 
     type: "tv",
-    url: "https://streaming.telepadrepio.it/live/stream.m3u8",
-    logo: "/logos/telepadrepio.svg",
-    description: "Tele Padre Pio Live",
-    category: "Catholic TV",
+    url: "https://catholictvhd-lh.akamaized.net/hls/live/2043390/CTVLiveHD/master.m3u8",
+    logo: "/logos/catholictv.png", 
+    description: "CatholicTV Network" 
   },
-  {
-    id: "vaticannews",
-    name: "Vatican Media",
+  { 
+    id: "vaticannews", 
+    name: "Vatican Media", 
     type: "tv",
     url: "https://smvlive.vaticannews.va/hls/smvlive/master.m3u8",
-    logo: "/logos/vaticannews.svg",
-    description: "Official Vatican Broadcasting",
-    category: "Vatican",
+    logo: "/logos/vaticannews.png", 
+    description: "Official Vatican Broadcasting" 
   },
-  {
-    id: "ewtn",
-    name: "EWTN Italia",
-    type: "tv",
-    url: "https://ewtn-lh.akamaihd.net/i/EWTN_ITA_1@378508/master.m3u8",
-    logo: "/logos/ewtn.svg",
-    description: "Eternal Word Television Network",
-    category: "Catholic TV",
-  },
-  {
-    id: "trbc",
-    name: "Tele Radio Buon Consiglio",
-    type: "tv",
-    url: "https://streaming.trbc.it/hls/live.m3u8",
-    logo: "/logos/trbc.svg",
-    description: "Tele Radio Buon Consiglio",
-    category: "Catholic TV",
-  },
-  {
-    id: "catholictv",
-    name: "CatholicTV",
-    type: "tv",
-    url: "https://edge.api.brightcove.com/playback/v1/accounts/1516765636/videos/live/master.m3u8",
-    logo: "/logos/catholictv.svg",
-    description: "CatholicTV Network",
-    category: "Catholic TV",
-  },
-  {
-    id: "shalomworld",
-    name: "Shalom World",
-    type: "tv",
-    url: "https://shalomworld.cdnvideo.ru/shalomworld/smil:shalomworld.stream.smil/master.m3u8",
-    logo: "/logos/shalomworld.svg",
-    description: "Shalom World TV",
-    category: "Catholic TV",
-  },
-  {
-    id: "radiomaria",
-    name: "Radio Maria",
+  { 
+    id: "radiomaria", 
+    name: "Radio Maria", 
     type: "radio",
     url: "https://shoutcast.radiomaria.it:8443/stream",
-    logo: "/logos/radiomaria.svg",
-    description: "Radio Maria - Live Radio",
-    category: "Catholic Radio",
-  },
+    logo: "/logos/radiomaria.png", 
+    description: "Radio Maria - Live Radio" 
+  }
 ];
