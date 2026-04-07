@@ -39,7 +39,7 @@ self.addEventListener("activate", (event) => {
 self.addEventListener("fetch", (event) => {
   const { request } = event;
   const url = new URL(request.url);
-  const pathname = SCOPE_PATH && url.pathname.startsWith(SCOPE_PATH)
+  const pathname = SCOPE_PATH.length > 0 && url.pathname.startsWith(SCOPE_PATH)
     ? (url.pathname.slice(SCOPE_PATH.length) || "/")
     : url.pathname;
 

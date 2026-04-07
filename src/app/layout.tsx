@@ -33,7 +33,8 @@ export default function RootLayout({
   return (
     <html lang="en" className="bg-catholic-navy">
       <head>
-        <link rel="icon" href={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/icons/icon-192.png`} sizes="192x192" />
+        <link rel="icon" href={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/icons/icon-192.png`} sizes="192x192" type="image/png" />
+        <link rel="shortcut icon" href={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/icons/icon-192.png`} type="image/png" />
         <link rel="apple-touch-icon" href={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/icons/icon-192.png`} />
       </head>
       <body className="bg-catholic-navy text-white min-h-screen">
