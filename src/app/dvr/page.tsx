@@ -1,28 +1,10 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { Recording } from "@/types";
+import React from "react";
 import { useStore } from "@/store/useStore";
 
 export default function DVRPage() {
   const { recordings } = useStore();
-  const [apiRecordings, setApiRecordings] = useState<Recording[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    fetch("/api/dvr/recordings")
-      .then((r) => r.json())
-      .then((data) => {
-        setApiRecordings(data.recordings || []);
-        setLoading(false);
-      })
-      .catch(() => {
-        setError("Failed to load recordings");
-        setLoading(false);
-      });
-  }, []);
-
-  const allRecordings = [...recordings, ...apiRecordings];
+  const allRecordings = recordings;
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -31,22 +13,12 @@ export default function DVRPage() {
         <p className="text-gray-400 text-sm">Record and replay your favorite Catholic programs.</p>
       </div>
 
-      {loading ? (
-        <div className="flex items-center justify-center py-20">
-          <div className="w-10 h-10 border-4 border-catholic-gold border-t-transparent rounded-full animate-spin" />
-        </div>
-      ) : error ? (
-        <div className="text-center py-12 text-gray-400">
-          <p className="text-lg mb-2">⚠️ {error}</p>
-          <p className="text-sm">DVR service may not be configured yet.</p>
-        </div>
-      ) : allRecordings.length === 0 ? (
+      {allRecordings.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-20 bg-white/5 rounded-xl border border-white/10 text-center">
           <div className="text-5xl mb-4" aria-hidden="true">⏺</div>
           <h2 className="text-xl font-semibold text-white mb-2">No recordings yet</h2>
           <p className="text-gray-400 text-sm max-w-xs">
-            Use the API endpoint{" "}
-            <code className="text-catholic-gold">/api/dvr/record</code> to start recording a stream.
+            Local DVR history will appear here as recordings are created in the app.
           </p>
         </div>
       ) : (

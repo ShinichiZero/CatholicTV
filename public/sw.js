@@ -1,10 +1,15 @@
 const CACHE_NAME = "catholictv-shell-v1";
+const SCOPE_PATH = new URL(self.registration.scope).pathname.replace(/\/$/, "");
+const withScope = (path) => {
+  const normalized = path.startsWith("/") ? path : `/${path}`;
+  return `${SCOPE_PATH}${normalized}`;
+};
 const STATIC_ASSETS = [
-  "/",
-  "/dvr",
-  "/manifest.json",
-  "/icons/icon-192.png",
-  "/icons/icon-512.png",
+  withScope("/"),
+  withScope("/dvr/"),
+  withScope("/manifest.json"),
+  withScope("/icons/icon-192.png"),
+  withScope("/icons/icon-512.png"),
 ];
 
 self.addEventListener("install", (event) => {
@@ -34,10 +39,13 @@ self.addEventListener("activate", (event) => {
 self.addEventListener("fetch", (event) => {
   const { request } = event;
   const url = new URL(request.url);
+  const pathname = SCOPE_PATH && url.pathname.startsWith(SCOPE_PATH)
+    ? (url.pathname.slice(SCOPE_PATH.length) || "/")
+    : url.pathname;
 
   // Never cache HLS streams or API calls
   if (
-    url.pathname.startsWith("/api/") ||
+    pathname.startsWith("/api/") ||
     request.url.includes(".m3u8") ||
     request.url.includes(".ts") ||
     request.url.includes("stream") ||
@@ -48,9 +56,9 @@ self.addEventListener("fetch", (event) => {
 
   // Cache-first for static assets
   if (
-    url.pathname.startsWith("/_next/static/") ||
-    url.pathname.startsWith("/icons/") ||
-    url.pathname.startsWith("/logos/")
+    pathname.startsWith("/_next/static/") ||
+    pathname.startsWith("/icons/") ||
+    pathname.startsWith("/logos/")
   ) {
     event.respondWith(
       caches.match(request).then(
@@ -75,7 +83,7 @@ self.addEventListener("fetch", (event) => {
         return response;
       })
       .catch(() =>
-        caches.match(request).then((cached) => cached || caches.match("/"))
+        caches.match(request).then((cached) => cached || caches.match(withScope("/")))
       )
   );
 });
