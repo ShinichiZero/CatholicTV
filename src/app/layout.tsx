@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "CatholicTV - Live Catholic Streaming",
   description:
     "Watch live Catholic TV and radio streams: TV2000, Telepace, Vatican Media, EWTN Italia, Shalom World, Radio Maria, and more.",
-  manifest: "/manifest.json",
+  manifest: `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/manifest.json`,
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
@@ -33,8 +33,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="bg-catholic-navy">
       <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+        <link rel="icon" href={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/icons/icon-192.png`} sizes="192x192" type="image/png" />
+        <link rel="shortcut icon" href={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/icons/icon-192.png`} type="image/png" />
+        <link rel="apple-touch-icon" href={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/icons/icon-192.png`} />
       </head>
       <body className="bg-catholic-navy text-white min-h-screen">
         <ServiceWorkerRegistration />

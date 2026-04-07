@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { CHANNELS } from "@/data/channels";
 import { Channel } from "@/types";
@@ -22,6 +22,13 @@ export default function HomePage() {
       document.getElementById("player-section")?.scrollIntoView({ behavior: "smooth" });
     }
   };
+
+  useEffect(() => {
+    const channelId = new URLSearchParams(window.location.search).get("channel");
+    if (!channelId || selectedChannel) return;
+    const channel = CHANNELS.find((c) => c.id === channelId);
+    if (channel) setSelectedChannel(channel);
+  }, [selectedChannel, setSelectedChannel]);
 
   return (
     <div className="flex flex-col lg:flex-row gap-6 min-h-[calc(100vh-3.5rem-3rem)]">
